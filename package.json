@@ -1,5 +1,5 @@
 {
-  "name": "gulp, sass, pug, webpack template",
+  "name": "starter-template",
   "version": "1.0.0",
   "license": "MIT",
   "devDependencies": {
