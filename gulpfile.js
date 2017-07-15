@@ -11,15 +11,19 @@ const getTask = task =>
 gulp.task('sass', getTask('sass'));
 gulp.task('pug', getTask('pug'));
 gulp.task('webpack', getTask('webpack').webpack);
-gulp.task('webpack:watch', getTask('webpack').watch);
 gulp.task('images', getTask('images'));
 gulp.task('server', getTask('server'));
 gulp.task('clean', getTask('clean'));
 
 // watch
-gulp.task('watch', ['webpack:watch'], () => {
-  gulp.watch(`${config.src.components}/**/*.pug`, ['pug']);
-  gulp.watch(`${config.src.components}/**/*.sass`, ['sass']);
-});
+gulp.task('webpack:watch', getTask('webpack').watch);
+gulp.task('pug:watch', () =>
+  gulp.watch(`${config.src.components}/**/*.pug`, ['pug'])
+);
+gulp.task('sass:watch', () =>
+  gulp.watch(`${config.src.components}/**/*.sass`, ['sass'])
+);
+gulp.task('watch', ['webpack:watch', 'pug:watch', 'sass:watch']);
 
+// default
 gulp.task('default', ['server', 'watch', 'pug', 'sass', 'webpack']);
